@@ -16,6 +16,9 @@ const handleDomainLookupMethodChange = (newMethod: DomainResolutionMethod) => {
   currentSession.settings.domainResolutionMethod = newMethod;
 }
 
+const handleLearnMoreClick = () => {
+  currentSession.selectedTab.url = "https://github.com/unstoppabledomains/unstoppable-demo-browser";
+}
 
 const SettingsHeaderText = () => {
   if(currentSession.updateAvailable){
@@ -51,7 +54,7 @@ export const SettingsPage = observer(({ visible, browserSession }: { visible: bo
       <Box1>
         Domain
         <Box2>
-          <LearnMoreButton>
+          <LearnMoreButton onClick={handleLearnMoreClick}>
             Learn More
           </LearnMoreButton>
           <Header1>
@@ -79,7 +82,7 @@ export const SettingsPage = observer(({ visible, browserSession }: { visible: bo
       <Box1>
         IPFS Content
         <Box2>
-          <LearnMoreButton>
+          <LearnMoreButton onClick={handleLearnMoreClick}>
             Learn More
           </LearnMoreButton>
           <Header1>

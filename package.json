@@ -1,7 +1,7 @@
 {
   "name": "unstoppablebrowser",
   "appId": "com.unstoppable.unstoppablebrowser",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "description": "A browser that reads zil DNS entries off the blockchain",
   "main": "build/bundle-electron.js",
   "scripts": {
