@@ -25,7 +25,7 @@ Use the Unstoppable Demo Browser to experience and explore the uncensorable web 
 
 # Screenshots
 
-![](screenshots/unstoppablebrowserscreenshot.png)
+![](screenshots/unstoppablebrowserscreenshot-oct-31.png)
 
 # How we resolve domain names
 
