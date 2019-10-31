@@ -36,10 +36,6 @@ config = {
     path: path.resolve(__dirname, 'build'),
     filename: `[name].bundle.js`
   },
-  externals: {
-    "react": "React",
-    "react-dom": "ReactDOM"
-  },
   devServer: {
     port: 3001 // Specify a port number to listen for requests
   }
