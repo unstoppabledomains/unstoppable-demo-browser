@@ -4,7 +4,13 @@ import { ipcRenderer } from 'electron';
 import ipfsNode from './ipfs-node';
 import { DomainResolver } from '../mixins/domain-resolver';
 
-export class ITab {
+export enum BrowserState {
+  Browsing = 'browsing',
+  NotFound = 'not-found',
+  Settings = 'settings'
+}
+
+export class Tab {
 
   constructor(url: string, session: BrowserSession) {
     this._session = session;
@@ -22,7 +28,19 @@ export class ITab {
   public viewId: number;
 
   @observable
-  public title: string = 'New tab';
+  private _title: string = 'New tab';
+
+  @computed
+  public get title(){
+    switch(this.browserState){
+      case BrowserState.Browsing:
+        return this._title;
+      case BrowserState.NotFound:
+        return 'Not found';
+      case BrowserState.Settings:
+        return 'Settings';
+    }
+  }
 
   @observable
   public loading = false;
@@ -36,11 +54,6 @@ export class ITab {
   @computed
   public get selected(){
     return this._session.selectedTab == this;
-  }
-
-  @computed
-  public get settingsPage(){
-    return this._settingsVisible;
   }
 
   @computed
@@ -66,6 +79,24 @@ export class ITab {
   }
 
   @observable
+  private _browserState: BrowserState = BrowserState.Browsing;
+  
+  public set browserState(browserState:BrowserState){
+    if(browserState == BrowserState.Browsing){
+      ipcRenderer.send('set-browser-visibility', true);
+    }else{
+      ipcRenderer.send('set-browser-visibility', false);
+    }
+
+    this._browserState = browserState;
+  }
+
+  @computed
+  public get browserState(){
+    return this._browserState;
+  }
+
+  @observable
   private _url = '';
 
   public set url(url: string) {
@@ -77,12 +108,13 @@ export class ITab {
     this.urlBarValue = url;
 
     if(url == "settings"){
-      this.settingsPage = true;
-      this.title = 'Settings';
+      this.settingsPage();
     }else{
       new DomainResolver(this._session.settings).resolve(url).then((response: any) => {
         ipcRenderer.send(`load-new-url-${this.viewId}`, response.dest, response.url);
-      });
+      }).catch((err) => {
+        this.browserState = BrowserState.NotFound;
+      })
     }
   }
 
@@ -92,16 +124,16 @@ export class ITab {
 
   public activate(){
     ipcRenderer.send('set-selected-browser', this.viewId);
-    if(this.settingsPage){
-      ipcRenderer.send('set-browser-visibility', false);
-    }else{
+
+    if(this._browserState == BrowserState.Browsing){
       ipcRenderer.send('set-browser-visibility', true);
+    }else{
+      ipcRenderer.send('set-browser-visibility', false);
     }
   }
 
-  public set settingsPage(yesno: boolean) {
-    this._settingsVisible = yesno;
-    ipcRenderer.send('set-browser-visibility', !yesno);
+  public settingsPage() {
+    this.browserState = BrowserState.Settings;
   }
 
   public buildBrowserView() {
@@ -114,16 +146,14 @@ export class ITab {
       });
 
       ipcRenderer.on(`view-title-updated-${this.viewId}`, (event, title: string) => {
-        this.title = title;
+        this._title = title;
       });
 
       ipcRenderer.on(`navigate-done-${this.viewId}`, (event, url:string) => {
         this._url = url;
         this.urlBarValue = url;
 
-        if(this.settingsPage){
-          this.settingsPage = false;
-        }
+        this.browserState = BrowserState.Browsing;
       })
 
       ipcRenderer.on(`view-loading-${this.viewId}`, (event, yesno) => {
@@ -152,7 +182,4 @@ export class ITab {
       args
     });
   }
-
-  @observable
-  private _settingsVisible:boolean;
 }

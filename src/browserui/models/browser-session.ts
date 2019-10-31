@@ -1,5 +1,5 @@
 import { observable, computed, action } from 'mobx';
-import { ITab } from "~/browserui/models/tab";
+import { Tab } from "~/browserui/models/tab";
 import { ipcRenderer } from 'electron';
 import { BrowserSettings } from '~/browserui/models/browser-settings';
 
@@ -22,7 +22,7 @@ export class BrowserSession{
 
     ipcRenderer.on('api-remove-tab', (e, id) => {
       console.log("Remove tab " + id);
-      let tab: ITab = this.tabs.find(tab => tab.viewId === id);
+      let tab: Tab = this.tabs.find(tab => tab.viewId === id);
       if (tab && this.tabs.length > 1) {
         this.removeTab(tab);
       }
@@ -38,7 +38,7 @@ export class BrowserSession{
 
   public settings: BrowserSettings = new BrowserSettings();
 
-  public tabs: ITab[] = observable.array([], { deep: false });
+  public tabs: Tab[] = observable.array([], { deep: false });
 
   @observable
   public navigationState = {
@@ -53,7 +53,7 @@ export class BrowserSession{
   public showSettings: boolean = false;
 
   @observable
-  private _selectedTab: ITab;
+  private _selectedTab: Tab;
 
   @observable
   private _visible: boolean = null;
@@ -82,7 +82,7 @@ export class BrowserSession{
     return this._selectedTab;
   }
 
-  public set selectedTab(tab: ITab){
+  public set selectedTab(tab: Tab){
     console.log("Setting selected tab");
 
     this._selectedTab = tab;
@@ -90,12 +90,12 @@ export class BrowserSession{
   }
 
   public addTab(url: string){
-    let newTab = new ITab(url, this);
+    let newTab = new Tab(url, this);
     this.tabs.push(newTab);
     this.selectedTab = newTab;
   }
 
-  public removeTab(tab: ITab){
+  public removeTab(tab: Tab){
     var index = this.tabs.indexOf(tab);
 
     if (index > -1) {

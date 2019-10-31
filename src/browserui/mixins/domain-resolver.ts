@@ -35,22 +35,28 @@ export class DomainResolver {
         showUrl = url.replace('http://', 'ipfs://');
         switch (this.browserSettings.domainResolutionMethod) {
           case DomainResolutionMethod.UnstoppableAPI:
+            console.log("Resolving via unstoppable API");
             this.resolveZilUnstoppableAPI(domain).then((zilResult) => {
               if (zilResult) {
                 destUrl = this.cdnBaseUrl + zilResult + "/";
-              } else {
-                destUrl = this.resolveDemoUrl(domain);
-              }
+              } 
               resolve({ url: showUrl, dest: destUrl });
+            }).catch((err) => {
+              destUrl = this.resolveDemoUrl(domain);
+              resolve({ url: showUrl, dest: destUrl });
+              // console.log(err);
+              // reject(err);
             });
+            break;
           case DomainResolutionMethod.ZilliqaApi:
+            console.log("Resolving via Zilliqa API");
             this.resolveZilZilAPI(domain).then((zilResult) => {
               if (zilResult) {
                 destUrl = this.cdnBaseUrl + zilResult + "/";
                 resolve({ url: showUrl, dest: destUrl });
               }
             }).catch((err) => {
-              console.log("Error " + err);
+              reject(err);
             });
             break;
         }
@@ -68,8 +74,7 @@ export class DomainResolver {
           console.log(response.data.ipfs.html);
           resolve(response.data.ipfs.html);
         } else {
-          console.log('No valid API response returned');
-          resolve(undefined);
+          reject('No valid API response returned');
         }
       });
     });
@@ -95,9 +100,10 @@ export class DomainResolver {
   }
 
   public resolveDemoUrl(domain: string) {
-    if (domain.indexOf('ipfs://brad.zil') != -1) {
+    console.log("Demo domain: " + domain);
+    if (domain.indexOf('brad') != -1) {
       return this.cdnBaseUrl + "QmefehFs5n8yQcGCVJnBMY3Hr6aMRHtsoniAhsM1KsHMSe/";
-    } else if (domain.indexOf('ipfs://matt.zil') != -1) {
+    } else if (domain.indexOf('matt') != -1) {
       return this.cdnBaseUrl + "QmUD69diRF8jwju2k4b9mD7PaXMjtMAKafqascL18VKvoD/";
     } else {
       return this.cdnBaseUrl + "QmWcLKHWqrRB95zQnb4vX8RRgoGsVm5YAUHyZyiAw4mCMQ/";

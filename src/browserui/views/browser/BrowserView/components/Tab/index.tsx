@@ -3,21 +3,21 @@ import * as React from 'react';
 
 import { StyledTab, TabContainer, StyledIcon, StyledClose, StyledContent, StyledTitle } from './style';
 import { BrowserSession } from '~/browserui/models/browser-session';
-import { ITab } from '~/browserui/models/tab';
+import { Tab } from '~/browserui/models/tab';
 import { Preloader } from '~/browserui/views/browser/BrowserView/components/Preloader';
 
 let currentSession: BrowserSession = null;
 
-const removeTab = (tab: ITab) => {
+const removeTab = (tab: Tab) => {
   currentSession.removeTab(tab);
 };
 
-const setSelectedTab = (tab: ITab) => {
+const setSelectedTab = (tab: Tab) => {
   console.log("Selected tab set");
   currentSession.selectedTab = tab;
 }
 
-const Content = observer(({ tab }: { tab: ITab }) => {
+const Content = observer(({ tab }: { tab: Tab }) => {
   return (
     <StyledContent collapsed={true} pinned={false}>
       {!tab.loading && tab.favicon !== '' && (
@@ -49,7 +49,7 @@ const Content = observer(({ tab }: { tab: ITab }) => {
   );
 });
 
-const Close = observer(({ tab }: { tab: ITab }) => {
+const Close = observer(({ tab }: { tab: Tab }) => {
   if(tab.collapsable){
     return (
       <StyledClose onClick={(event) => { event.stopPropagation(); removeTab(tab) }} />
@@ -59,7 +59,7 @@ const Close = observer(({ tab }: { tab: ITab }) => {
   }
 });
 
-export default observer(({ tab, browserSession }: { tab: ITab, browserSession: BrowserSession }) => {
+export default observer(({ tab, browserSession }: { tab: Tab, browserSession: BrowserSession }) => {
   currentSession = browserSession;
   
   return (
