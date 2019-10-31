@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 const dev = process.env.ENV === 'dev';
@@ -24,7 +25,14 @@ module.exports = {
       '~': path.resolve(__dirname, 'src'),
     }
   },
-  plugins: [],
+  plugins: [
+    new CopyWebpackPlugin([
+      { 
+        test: /\.(plst)$/,
+        from: 'static' 
+      }
+    ])
+  ],
   externals: {
     "react": "React",
     "react-dom": "ReactDOM"
