@@ -1,0 +1,56 @@
+{
+  "appId": "com.unstoppable.unstoppablebrowser",
+  "productName": "Unstoppable Demo Browser",
+  "copyright": "Copyright © year ${author}",
+  "nsis": {
+    "include": "static/installer.nsh",
+    "oneClick": "false"
+  },
+  "asar": true,
+  "directories": {
+    "output": "dist",
+    "buildResources": "static/app-icons"
+  },
+  "files": [
+    "build/**/*",
+    "package.json",
+    "static/**/*"
+  ],
+  "publish": {
+    "provider": "github",
+    "publishAutoUpdate": true
+  },
+  "mac": {
+    "category": "public.app-category.navigation",
+    "hardenedRuntime" : true,
+    "gatekeeperAssess": false,
+    "entitlements": "build/entitlements.mac.plist",
+    "entitlementsInherit": "build/entitlements.mac.plist"
+  },
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": [
+          "x64",
+          "ia32"
+        ]
+      },
+      {
+        "target": "zip",
+        "arch": [
+          "x64",
+          "ia32"
+        ]
+      }
+    ]
+  },
+  "fileAssociations": [
+    {
+      "name": "Document",
+      "description": "Unstoppable Browser",
+      "role": "Viewer",
+      "ext": "html"
+    }
+  ]
+}

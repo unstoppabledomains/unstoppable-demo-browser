@@ -1,0 +1,64 @@
+{
+  "name": "unstoppablebrowser",
+  "appId": "com.unstoppable.unstoppablebrowser",
+  "version": "0.0.4",
+  "description": "A browser that reads zil DNS entries off the blockchain",
+  "main": "build/bundle-electron.js",
+  "scripts": {
+    "dev": "cross-env ENV='dev' webpack-dev-server --config webpack.config.browserui.js",
+    "build": "npx webpack --config webpack.config.electron.js && npx webpack --config webpack.config.browserui.js",
+    "compile-darwin": "npm run build && electron-builder -m -p always",
+    "compile-darwin-local": "npm run build && electron-builder -m",
+    "compile-win": "npm run build && electron-builder -w -p always",
+    "compile-mac-win": "npm run build && electron-builder -wm -p always",
+    "start": "cross-env ENV='dev' electron .",
+    "prestart": "npm run build",
+    "afterSign": "scripts/notarize.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unstoppabledomains/unstoppable-demo-browser.git"
+  },
+  "keywords": [
+    "browser",
+    "internet",
+    "addiction"
+  ],
+  "author": "Unstoppable Domains",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unstoppabledomains/unstoppable-demo-browser/issues"
+  },
+  "homepage": "https://github.com/unstoppabledomains/unstoppable-demo-browser#readme",
+  "devDependencies": {
+    "@types/node": "^12.11.6",
+    "@types/react": "^16.9.9",
+    "@types/react-dom": "^16.9.0",
+    "@types/styled-components": "^4.1.19",
+    "axios": "^0.19.0",
+    "cross-env": "^6.0.3",
+    "electron": "^6.1.1",
+    "electron-builder": "^21.2.0",
+    "electron-log": "^3.0.8",
+    "electron-notarize": "^0.1.1",
+    "electron-updater": "4.1.2",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "ipfs-http-client": "^38.2.1",
+    "mobx": "^5.14.2",
+    "mobx-react-lite": "^1.4.1",
+    "namicorn": "^0.2.42",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-hot-loader": "^4.12.13",
+    "react-windows-controls": "^1.1.1",
+    "source-map-loader": "^0.2.4",
+    "styled-components": "^4.3.2",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.6.3",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
+  }
+}
