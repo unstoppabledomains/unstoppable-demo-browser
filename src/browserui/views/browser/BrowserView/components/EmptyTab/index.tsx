@@ -4,33 +4,40 @@ import { Container, Input } from './style';
 import { SearchBar, SearchIcon, Microphone } from './style';
 import { BookMarkArea, BookMarkButtonBox1, BookMarkButton1, TextLabel1 } from './style';
 import { BrowserSession } from '~/browserui/models/browser-session';
+import { Form } from '../SearchBar/style';
 
 
 var bookmarksData = [
-  { "id": 1, "name": "something1toolongfortheavailablespace", "thumb": "https://sjc5.discourse-cdn.com/sitepoint/community/user_avatar/www.sitepoint.com/ryanreese/45/54672_2.png", "url": "https://www.w3schools.com/" },
-  { "id": 2, "name": "some", "thumb": "https://www.w3schools.com/images/colorpicker.png", "url": "http://somethingelse1.com" },
-  { "id": 3, "name": "something", "thumb": "https://www.w3schools.com/images/colorpicker.gif", "url": "http://somethingelse2.com" },
-  { "id": 4, "name": "something", "thumb": "https://www.w3schools.com/images/colorpicker.gif", "url": "http://somethingelse3.com" },
-  { "id": 5, "name": "something", "thumb": "https://www.w3schools.com/images/colorpicker.gif", "url": "http://somethingelse4.com" },
-  { "id": 6, "name": "something2toolongfortheavailablespace", "thumb": "https://avatars0.githubusercontent.com/u/57091020?s=40&v=4", "url": "http://somethingelse5.com" },
-  { "id": 7, "name": "something3toolongfortheavailablespace", "thumb": "https://www.w3schools.com/images/colorpicker.gif", "url": "http://somethingelse6.com" },
-  { "id": 8, "name": "thing4toolongfortheavailablespace", "thumb": "https://www.w3schools.com/images/colorpicker.gif", "url": "http://somethingelse7.com" }
+  { "id": 1, "name": "Coin Desk", "thumb": "https://static.coindesk.com/wp-content/uploads/2017/07/Screen-Shot-2017-07-17-at-7.36.51-AM-860x430.png", "url": "https://www.coindesk.com" },
+  { "id": 2, "name": "Etherscan", "thumb": "https://pbs.twimg.com/profile_images/635495766744674305/DrBKyYcl_400x400.png", "url": "https://etherscan.io/" },
+  { "id": 3, "name": "Coinbase", "thumb": "https://cdn-images-1.medium.com/max/1200/1*gBXfxLQiRiP5NycsMHPzKA.png", "url": "https://www.coinbase.com/" },
+  { "id": 4, "name": "Mai Coin", "thumb": "https://www.maicoin.com/assets/grouping/maicoin-4e1caf66019fdc3ab329897bff1cbc617b7cfa317c76189687fc3964476e190d.svg", "url": "https://www.maicoin.com/" },
+  { "id": 5, "name": "Blockchain", "thumb": "https://theme.zdassets.com/theme_assets/224702/f1769fc082175cd2e7ef495fc941b08f235d0a41.png", "url": "https://www.blockchain.com/" },
+  { "id": 6, "name": "Stocktwits - BTC", "thumb": "https://yt3.ggpht.com/a/AGF-l7_ZqPm_Q_a9ihthi4CQ70XHf2r3RaQVr02wMw=s900-c-k-c0xffffffff-no-rj-mo", "url": "https://stocktwits.com/symbol/BTC.X" },
+  { "id": 7, "name": "GitHub", "thumb": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPdpML_SXMqa794sB1TJDiBix0gsFwvkuE9cJ4KFdQvA2gA2J3&s", "url": "http://www.github.com" },
+  { "id": 8, "name": "Walt", "thumb": "https://upload.wikimedia.org/wikipedia/commons/3/35/Wikipedia-W-bold-in-square-Clean.svg", "url": "http://walt.fyi/" }
 ];
 
 let currentSession: BrowserSession = null;
 
+const handleUrlSubmit = (event: any) => {
+  event.preventDefault();
+  var url = currentSession.selectedTab.emptyTabUrlValue;
+  currentSession.selectedTab.url = url;
+}
+
 const handleMicrophoneClick = () => {
-  currentSession.selectedTab.url = currentSession.selectedTab.urlBarValue;
+  currentSession.selectedTab.url = currentSession.selectedTab.emptyTabUrlValue;
 }
 
 const handleBookMarkButton1Click = (bookmarkData: any) => {
   console.log(bookmarkData);
-  //currentSession.selectedTab.url = bookmarkData.url;
+  currentSession.selectedTab.url = bookmarkData.url;
 }
 
 const handleUrlBarChange = (event: any) => {
   if (currentSession.selectedTab) {
-    currentSession.selectedTab.urlBarValue = event.target.value;
+    currentSession.selectedTab.emptyTabUrlValue = event.target.value;
   }
 }
 
@@ -59,14 +66,16 @@ export const EmptyTab = observer(({ visible, browserSession }: { visible: boolea
   return (
     <div style={pageStyle}>
       <Container>
-        <SearchBar>
-          <Input type="text" placeholder="Please tell me how to..."
-            value={browserSession.currentUrlBarValue}
-            onChange={handleUrlBarChange} />
-          <SearchIcon />
-          <Microphone onClick={handleMicrophoneClick}>
-          </Microphone>
-        </SearchBar>
+        <Form onSubmit={handleUrlSubmit}>
+          <SearchBar>
+            <Input type="text" placeholder="Please tell me how to..."
+              value={browserSession.selectedTab.emptyTabUrlValue}
+              onChange={handleUrlBarChange} />
+            <SearchIcon />
+            <Microphone onClick={handleMicrophoneClick}>
+            </Microphone>
+          </SearchBar>
+        </Form>
         <BookMarkArea onClick={handleBookMarkButton1Click}>
           {BookMarkButtons()}
         </BookMarkArea>

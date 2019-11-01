@@ -50,7 +50,7 @@ export const SearchIcon = styled('div')`
 
 export const Microphone = styled('div')` 
     ${centerIcon()};
-    background-image: url(${icons.incognito});
+    background-image: url(${icons.multrin});
     height: 24px;
     min-width: 22px;
     margin: auto;

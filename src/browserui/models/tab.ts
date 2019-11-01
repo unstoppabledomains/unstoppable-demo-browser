@@ -1,4 +1,4 @@
-import { observable, computed, action } from 'mobx';
+import { observable, computed, action, onBecomeObserved } from 'mobx';
 import browserSession, { BrowserSession } from '~/browserui/models/browser-session';
 import { ipcRenderer } from 'electron';
 import ipfsNode from './ipfs-node';
@@ -17,6 +17,8 @@ export class Tab {
     this._session = session;
 
     this.buildBrowserView();
+
+    this.browserState = BrowserState.NewTab;
   }
 
   private _session: BrowserSession;
@@ -53,6 +55,9 @@ export class Tab {
   @observable
   public urlBarValue = '';
 
+  @observable
+  public emptyTabUrlValue = '';
+
   @computed
   public get selected(){
     return this._session.selectedTab == this;
@@ -81,7 +86,7 @@ export class Tab {
   }
 
   @observable
-  private _browserState: BrowserState = BrowserState.NewTab;
+  private _browserState: BrowserState;
   
   public set browserState(browserState:BrowserState){
     if(browserState == BrowserState.Browsing){
