@@ -120,6 +120,7 @@ export class Tab {
       new DomainResolver(this._session.settings).resolve(url).then((response: any) => {
         ipcRenderer.send(`load-new-url-${this.viewId}`, response.dest, response.url);
       }).catch((err) => {
+        console.log("Not found error: " + err);
         this.browserState = BrowserState.NotFound;
       })
     }

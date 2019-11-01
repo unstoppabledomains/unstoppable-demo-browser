@@ -31,8 +31,9 @@ const handleMicrophoneClick = () => {
 }
 
 const handleBookMarkButton1Click = (bookmarkData: any) => {
-  console.log(bookmarkData);
-  currentSession.selectedTab.url = bookmarkData.url;
+  if(bookmarkData.url){
+    currentSession.selectedTab.url = bookmarkData.url;
+  }
 }
 
 const handleUrlBarChange = (event: any) => {
@@ -43,7 +44,7 @@ const handleUrlBarChange = (event: any) => {
 
 var BookMarkButtons = () => {
   var bookmarks = bookmarksData.map(item => (
-    <BookMarkButtonBox1 key={item.id} onClick={() => handleBookMarkButton1Click(item)}>
+    <BookMarkButtonBox1 key={item.id} onClick={(event) => { handleBookMarkButton1Click(item)}}>
       <BookMarkButton1>
         <img style={{ "width": "100%", "height": "100%" }} src={item.thumb} /><a href={item.url} />
       </BookMarkButton1>
