@@ -28,7 +28,7 @@ const handleMicrophoneClick = () => {
 
 const handleBookMarkButton1Click = (bookmarkData:any) => {
   console.log(bookmarkData);
-  //currentSession.selectedTab.url = bookmarksData.url;
+  //currentSession.selectedTab.url = bookmarkData.url;
 }
 
 const handleUrlBarChange = (event: any) => {
