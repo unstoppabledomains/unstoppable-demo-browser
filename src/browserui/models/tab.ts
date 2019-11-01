@@ -5,6 +5,7 @@ import ipfsNode from './ipfs-node';
 import { DomainResolver } from '../mixins/domain-resolver';
 
 export enum BrowserState {
+  NewTab = 'newtab',
   Browsing = 'browsing',
   NotFound = 'not-found',
   Settings = 'settings'
@@ -12,9 +13,8 @@ export enum BrowserState {
 
 export class Tab {
 
-  constructor(url: string, session: BrowserSession) {
+  constructor(session: BrowserSession) {
     this._session = session;
-    this._url = url;
 
     this.buildBrowserView();
   }
@@ -40,6 +40,8 @@ export class Tab {
       case BrowserState.Settings:
         return 'Settings';
     }
+
+    return 'New Tab';
   }
 
   @observable
@@ -79,7 +81,7 @@ export class Tab {
   }
 
   @observable
-  private _browserState: BrowserState = BrowserState.Browsing;
+  private _browserState: BrowserState = BrowserState.NewTab;
   
   public set browserState(browserState:BrowserState){
     if(browserState == BrowserState.Browsing){

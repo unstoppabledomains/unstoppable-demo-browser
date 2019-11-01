@@ -11,6 +11,7 @@ import { icons } from "~/browserui/resources/constants";
 import { SettingsPage } from './components/SettingsPage';
 import { NotFoundPage } from "~/browserui/views/browser/BrowserView/components/NotFoundPage";
 import { BrowserState } from "~/browserui/models/tab";
+import { EmptyTab } from "./components/EmptyTab";
 
 
 const { dialog } = require('electron').remote;
@@ -21,6 +22,7 @@ export const BrowserView = observer(({ browserSession }: { browserSession: Brows
     <BrowserContainer visible={true}>
       <Toolbar browserSession={browserSession} />
       <SearchBox browserSession={browserSession} />
+      <EmptyTab browserSession={browserSession} visible={browserSession.selectedTab.browserState == BrowserState.NewTab} />
       <SettingsPage browserSession={browserSession} visible={browserSession.selectedTab.browserState == BrowserState.Settings} />
       <NotFoundPage visible={browserSession.selectedTab.browserState == BrowserState.NotFound } />
     </BrowserContainer>

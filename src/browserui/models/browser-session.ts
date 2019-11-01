@@ -6,14 +6,14 @@ import { BrowserSettings } from '~/browserui/models/browser-settings';
 export class BrowserSession{
 
   constructor() {
-    this.addTab('https://google.com');
+    this.addTab();
 
     ipcRenderer.on('update-navigation-state', (e, data) => {
       this.navigationState = data;
     });
 
     ipcRenderer.on('api-tabs-create', (e) => {
-      this.addTab('https://google.com');
+      this.addTab();
     });
 
     ipcRenderer.on('open-settings', (e) => {
@@ -89,8 +89,8 @@ export class BrowserSession{
     this._selectedTab.activate();
   }
 
-  public addTab(url: string){
-    let newTab = new Tab(url, this);
+  public addTab(){
+    let newTab = new Tab(this);
     this.tabs.push(newTab);
     this.selectedTab = newTab;
   }
