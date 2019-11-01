@@ -31,7 +31,7 @@ export const Tabbar = observer(({ browserSession }: { browserSession: BrowserSes
           <Tab key={item.viewId} tab={item} browserSession={browserSession} />
         ))}
       </TabsContainer>
-      <AddTab icon={icons.add} onClick={() => browserSession.addTab("https://google.com")} />
+      <AddTab icon={icons.add} onClick={() => browserSession.addTab()} />
 
       {platform() !== 'darwin' && (
         <WindowsControls

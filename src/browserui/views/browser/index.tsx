@@ -9,8 +9,6 @@ import { ipcRenderer } from 'electron';
 const { dialog } = require('electron').remote;
 var fs = require('fs');
 
-browserSession.visible = true;
-
 const TopBar = styled('div') `
   position: absolute;
   top: 0;

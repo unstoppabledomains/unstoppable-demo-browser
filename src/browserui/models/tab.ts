@@ -1,10 +1,11 @@
-import { observable, computed, action } from 'mobx';
+import { observable, computed, action, onBecomeObserved } from 'mobx';
 import browserSession, { BrowserSession } from '~/browserui/models/browser-session';
 import { ipcRenderer } from 'electron';
 import ipfsNode from './ipfs-node';
 import { DomainResolver } from '../mixins/domain-resolver';
 
 export enum BrowserState {
+  NewTab = 'newtab',
   Browsing = 'browsing',
   NotFound = 'not-found',
   Settings = 'settings'
@@ -12,11 +13,12 @@ export enum BrowserState {
 
 export class Tab {
 
-  constructor(url: string, session: BrowserSession) {
+  constructor(session: BrowserSession) {
     this._session = session;
-    this._url = url;
 
     this.buildBrowserView();
+
+    this.browserState = BrowserState.NewTab;
   }
 
   private _session: BrowserSession;
@@ -40,6 +42,8 @@ export class Tab {
       case BrowserState.Settings:
         return 'Settings';
     }
+
+    return 'New Tab';
   }
 
   @observable
@@ -50,6 +54,9 @@ export class Tab {
 
   @observable
   public urlBarValue = '';
+
+  @observable
+  public emptyTabUrlValue = '';
 
   @computed
   public get selected(){
@@ -79,7 +86,7 @@ export class Tab {
   }
 
   @observable
-  private _browserState: BrowserState = BrowserState.Browsing;
+  private _browserState: BrowserState;
   
   public set browserState(browserState:BrowserState){
     if(browserState == BrowserState.Browsing){
@@ -113,6 +120,7 @@ export class Tab {
       new DomainResolver(this._session.settings).resolve(url).then((response: any) => {
         ipcRenderer.send(`load-new-url-${this.viewId}`, response.dest, response.url);
       }).catch((err) => {
+        console.log("Not found error: " + err);
         this.browserState = BrowserState.NotFound;
       })
     }

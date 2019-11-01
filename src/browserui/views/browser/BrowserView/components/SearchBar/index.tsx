@@ -73,6 +73,7 @@ export const SearchBox = observer(({ browserSession }: { browserSession: Browser
           <SearchIcon />
           <Form onSubmit={handleUrlSubmit}>
             <Input
+              type="text"
               autoFocus
               placeholder="Search or type in URL"
               value={browserSession.currentUrlBarValue}

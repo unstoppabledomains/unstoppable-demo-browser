@@ -40,6 +40,7 @@ export const App = observer(() => {
       <StyledFind>
         <SearchIcon style={{ filter: 'none' }} />
         <Input
+          type='text'
           autoFocus
           onKeyPress={onKeyPress}
           onChange={onInput}
