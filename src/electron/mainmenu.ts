@@ -111,6 +111,13 @@ export const getMainMenu = (viewManager: ViewManager) => {
           },
         },
         {
+          label: 'Show danger screen',
+          visible: true,
+          click() {
+            viewManager.window.webContents.send('show-danger-screen');
+          },
+        },
+        {
           type: 'separator',
         },
         {

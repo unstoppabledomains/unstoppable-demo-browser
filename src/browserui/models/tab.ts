@@ -42,6 +42,8 @@ export class Tab {
         return 'Not found';
       case BrowserState.Settings:
         return 'Settings';
+      case BrowserState.DangerPage:
+        return 'Unsafe site';
     }
 
     return 'New Tab';

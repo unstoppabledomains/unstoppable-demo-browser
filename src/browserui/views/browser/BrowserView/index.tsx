@@ -17,7 +17,7 @@ import { DangerPage} from "./components/DangerPage";
 
 const { dialog } = require('electron').remote;
 
-browserSession.selectedTab.browserState = BrowserState.DangerPage;
+// browserSession.selectedTab.browserState = BrowserState.DangerPage;
 
 export const BrowserView = observer(({ browserSession }: { browserSession: BrowserSession }) => {
   return (

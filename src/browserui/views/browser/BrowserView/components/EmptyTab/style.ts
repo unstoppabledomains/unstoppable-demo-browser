@@ -49,19 +49,6 @@ export const SearchIcon = styled('div')`
     line-height: 20px;
 `;
 
-// export const Microphone = styled('div')` 
-//     ${centerIcon()};
-//     background-image: url(${icons.multrin});
-//     height: 24px;
-//     min-width: 22px;
-//     margin: auto;
-//     float: right;
-//     margin-left: 10px;
-//     margin-right: 10px;
-//     line-height: 20px;
-//     cursor: pointer;
-// `;
-
 export const BookMarkArea = styled('div')`
     box-sizing: border-box;
     width: 550px;

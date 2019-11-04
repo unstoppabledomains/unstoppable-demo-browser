@@ -1,5 +1,5 @@
 import { observable, computed, action } from 'mobx';
-import { Tab } from "~/browserui/models/tab";
+import { Tab, BrowserState } from "~/browserui/models/tab";
 import { ipcRenderer } from 'electron';
 import { BrowserSettings } from '~/browserui/models/browser-settings';
 
@@ -29,6 +29,11 @@ export class BrowserSession{
     })
 
     console.log("BrowserSession start listening to update-available.");
+
+
+    ipcRenderer.on('show-danger-screen', () => {
+      this.selectedTab.browserState = BrowserState.DangerPage;
+    });
 
     ipcRenderer.on('update-available', (e) => {
       console.log("ipcRenderer got [Update available]");
