@@ -8,7 +8,8 @@ export enum BrowserState {
   NewTab = 'newtab',
   Browsing = 'browsing',
   NotFound = 'not-found',
-  Settings = 'settings'
+  Settings = 'settings',
+  DangerPage = 'danger'
 }
 
 export class Tab {
