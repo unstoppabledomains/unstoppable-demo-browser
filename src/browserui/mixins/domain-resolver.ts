@@ -32,17 +32,19 @@ export class DomainResolver {
       let domain = hostnameParts[hostnameParts.length - 2];
 
       if (extension == 'zil') {
-        showUrl = url.replace('http://', 'ipfs://');
+        showUrl = url;
+
         switch (this.browserSettings.domainResolutionMethod) {
           case DomainResolutionMethod.UnstoppableAPI:
             console.log("Resolving via unstoppable API");
             this.resolveZilUnstoppableAPI(domain).then((zilResult) => {
               if (zilResult) {
+                showUrl = url.replace('http://', 'ipfs://');
                 destUrl = this.cdnBaseUrl + zilResult + "/";
-              } 
-              resolve({ url: showUrl, dest: destUrl });
+                resolve({ url: showUrl, dest: destUrl });
+              }
             }).catch((err) => {
-              destUrl = this.resolveDemoUrl(domain);
+              destUrl = "https://unstoppabledomains.com/search?searchTerm=" + domain + "&searchRef=home";
               resolve({ url: showUrl, dest: destUrl });
               // console.log(err);
               // reject(err);
@@ -52,11 +54,13 @@ export class DomainResolver {
             console.log("Resolving via Zilliqa API");
             this.resolveZilZilAPI(domain).then((zilResult) => {
               if (zilResult) {
+                showUrl = url.replace('http://', 'ipfs://');
                 destUrl = this.cdnBaseUrl + zilResult + "/";
                 resolve({ url: showUrl, dest: destUrl });
               }
             }).catch((err) => {
-              reject(err);
+              destUrl = "https://unstoppabledomains.com/search?searchTerm=" + domain + "&searchRef=home";
+              resolve({ url: showUrl, dest: destUrl });
             });
             break;
         }
