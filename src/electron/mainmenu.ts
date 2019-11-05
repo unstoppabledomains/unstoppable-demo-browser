@@ -11,7 +11,7 @@ export const getMainMenu = (viewManager: ViewManager) => {
           accelerator: 'CmdOrCtrl+T',
           label: 'New tab',
           click() {
-            viewManager.window.webContents.send('api-tabs-create');
+            viewManager.window.webContents.send('api-tabs-create', undefined);
           },
         },
         {

@@ -12,8 +12,12 @@ export class BrowserSession{
       this.navigationState = data;
     });
 
-    ipcRenderer.on('api-tabs-create', (e) => {
+    ipcRenderer.on('api-tabs-create', (e, url) => {
+      console.log("Called " + url);
       this.addTab();
+      if(url){
+        this.selectedTab.url = url;
+      }
     });
 
     ipcRenderer.on('open-settings', (e) => {

@@ -132,6 +132,29 @@ export class View extends BrowserView {
       },
     );
 
+    this.webContents.addListener(
+      'new-window',
+      (e, url, frameName, disposition) => {
+        console.log(frameName + " " + disposition);
+        if (disposition === 'new-window') {
+          if (frameName === '_self') {
+            e.preventDefault();
+            this.webContents.loadURL(url);
+          } else if (frameName === '_blank') {
+            e.preventDefault();
+            this.window.webContents.send('api-tabs-create', url);
+          }
+        } else if (disposition == 'foreground-tab') {
+          e.preventDefault();
+          console.log("Foreground create tab");
+          this.window.webContents.send('api-tabs-create', url);
+        } else if (disposition === 'background-tab') {
+          e.preventDefault();
+          this.window.webContents.send('api-tabs-create', url);
+        }
+      },
+    );
+
   }
 
   public updateNavigationState() {
