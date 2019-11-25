@@ -1,8 +1,9 @@
 import { observable, computed, action, onBecomeObserved } from 'mobx';
 import browserSession, { BrowserSession } from '~/browserui/models/browser-session';
 import { ipcRenderer } from 'electron';
-import ipfsNode from './ipfs-node';
+import ipfsNode from '../mixins/ipfs-node';
 import { DomainResolver } from '../mixins/domain-resolver';
+import { IPFSContentMethod } from '~/browserui/models/browser-settings';
 
 export enum BrowserState {
   NewTab = 'newtab',
@@ -121,7 +122,12 @@ export class Tab {
       this.settingsPage();
     }else{
       new DomainResolver(this._session.settings).resolve(url).then((response: any) => {
-        ipcRenderer.send(`load-new-url-${this.viewId}`, response.dest, response.url);
+        if(response.type == 'zil' && this._session.settings.ipfsContentMethod == IPFSContentMethod.DesignatedIPFSNode){
+          console.log("Load content via IPFS node");
+          ipfsNode.loadIPFSSite(response.ipfsHash);
+        }else{
+          ipcRenderer.send(`load-new-url-${this.viewId}`, response.dest, response.url);
+        }
       }).catch((err) => {
         console.log("Not found error: " + err);
         this.browserState = BrowserState.NotFound;

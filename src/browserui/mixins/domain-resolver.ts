@@ -41,11 +41,11 @@ export class DomainResolver {
               if (zilResult) {
                 showUrl = url.replace('http://', 'ipfs://');
                 destUrl = this.cdnBaseUrl + zilResult + "/";
-                resolve({ url: showUrl, dest: destUrl });
+                resolve({ url: showUrl, dest: destUrl, type: 'zil', ipfsHash: zilResult });
               }
             }).catch((err) => {
               destUrl = "https://unstoppabledomains.com/search?searchTerm=" + domain + "&searchRef=home";
-              resolve({ url: showUrl, dest: destUrl });
+              resolve({ url: showUrl, dest: destUrl, type: 'http' });
               // console.log(err);
               // reject(err);
             });
@@ -56,16 +56,16 @@ export class DomainResolver {
               if (zilResult) {
                 showUrl = url.replace('http://', 'ipfs://');
                 destUrl = this.cdnBaseUrl + zilResult + "/";
-                resolve({ url: showUrl, dest: destUrl });
+                resolve({ url: showUrl, dest: destUrl, type: 'zil', ipfsHash: zilResult });
               }
             }).catch((err) => {
               destUrl = "https://unstoppabledomains.com/search?searchTerm=" + domain + "&searchRef=home";
-              resolve({ url: showUrl, dest: destUrl });
+              resolve({ url: showUrl, dest: destUrl, type: 'http' });
             });
             break;
         }
       } else {
-        resolve({ url: undefined, dest: url });
+        resolve({ url: undefined, dest: url, type: 'http' });
       }
     });
   }

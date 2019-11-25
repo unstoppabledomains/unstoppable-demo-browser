@@ -97,11 +97,11 @@ export const SettingsPage = observer(({ visible, browserSession }: { visible: bo
               <RadioButton type="radio" name="content" value="2" onChange={() => { handleIPFSMethodChange(IPFSContentMethod.InfuraAPI) }} checked={settings.ipfsContentMethod == IPFSContentMethod.InfuraAPI} />
               <OptionLabel>Infura API -</OptionLabel> <OptionLabel2> Non-paranoid + fast response times</OptionLabel2>
             </div>
-            {/* <div>
+            <div>
               <RadioButton type="radio" name="content" value="3" onChange={() => { handleIPFSMethodChange(IPFSContentMethod.DesignatedIPFSNode) }} checked={settings.ipfsContentMethod == IPFSContentMethod.DesignatedIPFSNode} />
-              <OptionLabel>Designted IPFS Node -</OptionLabel> <OptionLabel2> Non-parnoid + slow response times</OptionLabel2>
+              <OptionLabel>Directly from IPFS network -</OptionLabel> <OptionLabel2> Parnoid + slow response times</OptionLabel2>
             </div>
-            <Topic1>
+            {/* <Topic1>
               <div>
                 <RadioButton type="radio" name="content" value="4" />
                 <OptionLabel> Specify a node - </OptionLabel><input type="text" name="firstname" />
