@@ -13,6 +13,7 @@ import { NotFoundPage } from "~/browserui/views/browser/BrowserView/components/N
 import { BrowserState } from "~/browserui/models/tab";
 import { EmptyTab } from "./components/EmptyTab";
 import { DangerPage} from "./components/DangerPage";
+import { BottomBar } from "~/browserui/views/browser/BrowserView/components/BottomBar";
 
 
 const { dialog } = require('electron').remote;
@@ -28,6 +29,7 @@ export const BrowserView = observer(({ browserSession }: { browserSession: Brows
       <EmptyTab browserSession={browserSession} visible={browserSession.selectedTab.browserState == BrowserState.NewTab} />
       <SettingsPage browserSession={browserSession} visible={browserSession.selectedTab.browserState == BrowserState.Settings} />
       <NotFoundPage visible={browserSession.selectedTab.browserState == BrowserState.NotFound } />
+      <BottomBar />
     </BrowserContainer>
   );
 });

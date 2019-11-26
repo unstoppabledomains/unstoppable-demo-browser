@@ -123,8 +123,10 @@ export class Tab {
     }else{
       new DomainResolver(this._session.settings).resolve(url).then((response: any) => {
         if(response.type == 'zil' && this._session.settings.ipfsContentMethod == IPFSContentMethod.DesignatedIPFSNode){
-          console.log("Load content via IPFS node");
-          ipfsNode.loadIPFSSite(response.ipfsHash);
+          console.log("Load content via IPFS node -- " + response.url);
+          ipfsNode.loadIPFSSite(response.ipfsHash).then(() => {
+            ipcRenderer.send(`load-new-url-${this.viewId}`, 'http://localhost:10000/', response.url);
+          });
         }else{
           ipcRenderer.send(`load-new-url-${this.viewId}`, response.dest, response.url);
         }

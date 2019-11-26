@@ -32,11 +32,21 @@ export class View extends BrowserView {
     let newBounds = this.window.getBounds();
     this.window.setBrowserView(this);
 
-    this.setBounds({ x: 0, y: 80, width: newBounds.width, height: newBounds.height - 80 });
+    this.setBounds({ x: 0, y: 80, width: newBounds.width, height: newBounds.height - 110 });
     this.setAutoResize({
       width: true,
       height: true,
     } as any);
+
+    this.window.on('resize', () => {
+      let newBounds = this.window.getBounds();
+      this.setBounds({ x: 0, y: 80, width: newBounds.width, height: newBounds.height - 110 });
+      this.setAutoResize({
+        width: true,
+        height: true,
+      } as any);
+    });
+
 
     this.webContents.loadURL(url);
     this.window.setBrowserView(null);

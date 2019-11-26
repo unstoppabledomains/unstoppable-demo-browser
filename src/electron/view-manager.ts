@@ -59,6 +59,10 @@ export class ViewManager {
       if (view) {
         this.currentView = view;
         this.window.setBrowserView(view);
+        
+        let newBounds = this.window.getBounds();
+        view.setBounds({ x: 0, y: 80, width: newBounds.width, height: newBounds.height - 110 });
+
         view.updateNavigationState();
       }
     })

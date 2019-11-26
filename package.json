@@ -63,6 +63,8 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
-    "ipfs": "^0.39.0"
+    "@types/mime-types": "^2.1.0",
+    "ipfs": "^0.39.0",
+    "mime-types": "^2.1.25"
   }
 }

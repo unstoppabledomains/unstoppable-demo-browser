@@ -61,8 +61,6 @@ export const SearchBox = observer(({ browserSession }: { browserSession: Browser
   currentSession = browserSession;
   let height = 20;
 
-  console.log("Reloading SearchBox...." + browserSession.updateAvailable);
-
   return (
     <StyledSearchBar>
 

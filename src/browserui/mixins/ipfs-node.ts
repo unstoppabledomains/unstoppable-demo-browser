@@ -1,17 +1,52 @@
+import { observable } from "mobx";
+import * as mime from "mime-types";
 
 const IPFS = require('ipfs');
 const http = require('http');
 
+// TODO:
+// Clear caches between loads
+// Handle port collisions
+// Handle bad responses more elegantly
+// Set the title when the load completes for raw files
+// Enable turning on and off IPFS node
+// Set up loading indicator
+// Set up indicator for whether or not IPFS node is active
+
 class IPFSNode {
   private ipfsNode: any;
 
+  private contentType:string;
+
+  private webFiles:{[index:string] : {data: any}} = {};
+  private rawFile:any;
+
+  @observable
+  public loading: boolean = false;
+
   constructor() {
-    var server = http.createServer((req:any, res:any) => {     
+    var server = http.createServer((req:any, res:any) => {
       if (req.url == '/') {
-        res.setHeader('Content-Type', 'text/html');
-        res.end(`<!DOCTYPE html><meta charset="utf8"><body>Hello there</body>`);
-        return;
+        if(this.contentType === 'raw'){
+          res.write(this.rawFile);
+          res.end();
+        }else if(this.contentType == 'web'){
+          res.setHeader('Content-Type', 'text/html');
+          res.end(this.webFiles['/index.html']);
+        }
+      }else if(this.webFiles[req.url] !== undefined){
+        if(mime.lookup(req.url)){
+          res.setHeader('Content-Type', mime.lookup(req.url));
+        }        
+        res.write(this.webFiles[req.url]);
+        res.end();
+      }else{
+        console.log(req.url);
+        res.writeHead(404, {"Content-Type": "text/plain"});
+        res.write("404 Not Found\n");
+        res.end();
       }
+      return;
     });
   
     try{
@@ -29,39 +64,47 @@ class IPFSNode {
           const id = await this.ipfsNode.id();
           console.log("Node ready " + id);
         } catch (err) {
-          console.error(err)
+          console.log(err)
           reject(err);
         }
       }
 
-      console.log("Doing lookup");
-      // PINIATTA
+      console.log("Doing lookup -- " + address);
+      // SIMPLE
       // address = 'QmPChd2hVbrJ6bfo3WBcTW4iZnpHm8TEzWkLHmLpXhF68A';
 
-      // SIMPLE
+      // PINIATA
       // address = 'QmWcLKHWqrRB95zQnb4vX8RRgoGsVm5YAUHyZyiAw4mCMQ';
 
       // MATT.ZIL
-      address = 'QmUD69diRF8jwju2k4b9mD7PaXMjtMAKafqascL18VKvoD';
+      // address = 'QmUD69diRF8jwju2k4b9mD7PaXMjtMAKafqascL18VKvoD';
 
-      const stream = this.ipfsNode.getReadableStream(address);
-      stream.on('data', (file: any) => {
-        // write the file's path and contents to standard out
-        console.log(file.path)
-        if(file.type !== 'dir') {
-          file.content.on('data', (data: any) => {
-            console.log(data.toString())
-          })
-          file.content.resume()
+      this.ipfsNode.get(address).then((files: any) => {
+        if(files.length > 1){
+          this.contentType = 'web';
+          for(let i:number = 0; i < files.length; i++){
+            let file:any = files[i];
+            let filePath = file.path.replace(address, '');
+            if(filePath){
+              this.webFiles[filePath] = file.content;
+              console.log("Added " + filePath);
+            }else{
+              console.log("Invalid file path " + file);
+            }
+          }
+          resolve();
+        }else if(files.length == 1){
+          this.contentType = 'raw';
+          this.rawFile = files[0].content;
+
+          resolve();
+        }else{
+          console.log("Invalid response");
+          reject("Bad response from ipfs network");
         }
-      })
-
-      // this.ipfsNode.get(address, (error: any, files: any) => {
-      //   console.log("Got a response");
-      //   debugger;
-      // }).catch((err) {
-      //   console.log("Error: " + err);
-      // });
+      }).catch((error:any) => {
+        console.log(error);
+      });
     })
   }
 }

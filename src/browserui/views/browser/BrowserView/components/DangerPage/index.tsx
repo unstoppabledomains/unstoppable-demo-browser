@@ -12,12 +12,10 @@ export const DangerPage = observer(({ visible }: { visible: boolean }) => {
     }
 
     return (
-        <div>
-            <Container style={pageStyle}>
-                Danger value reached 1000. <br />
-                Throw your PC out of the nearest window immediately!!!! <br /><br />
-                Thank you for your cooperation.
-            </Container>
-        </div>
+      <Container style={pageStyle}>
+          Danger value reached 1000. <br />
+          Throw your PC out of the nearest window immediately!!!! <br /><br />
+          Thank you for your cooperation.
+      </Container>
     );
 });
