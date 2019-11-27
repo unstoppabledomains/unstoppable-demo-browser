@@ -59,9 +59,11 @@ export const LearnMoreButton = styled('div')`
   `;
 
 export const RadioButton = styled('input')`
+    margin-right: 10px;  
+`;
+
+export const CheckBox = styled('input')`
     margin-right: 10px;
-    
-    
 `;
 
 export const OptionLabel = styled('span')`

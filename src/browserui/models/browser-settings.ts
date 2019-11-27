@@ -39,17 +39,28 @@ export class BrowserSettings {
     this.saveSettings();
   }
 
+  @computed
+  public get alwaysRunIPFS() {
+    return this._alwaysRunIPFS;
+  }
+
+  public set alwaysRunIPFS(yesno:boolean){
+    this._alwaysRunIPFS = yesno;
+    this.saveSettings();
+  }
 
   public loadSettings() {
     let settings: any = ipcRenderer.sendSync('load-settings');
     this._resolutionMethod = settings.domainResolutionMethod;
     this._contentMethod = settings.ipfsContentMethod;
+    this._alwaysRunIPFS = settings.alwaysRunIPFS;
   }
 
   public saveSettings() {
     ipcRenderer.send("save-settings", {
       domainResolutionMethod: this._resolutionMethod,
-      ipfsContentMethod: this._contentMethod
+      ipfsContentMethod: this._contentMethod,
+      alwaysRunIPFS: this._alwaysRunIPFS
     });
   }
 
@@ -58,5 +69,8 @@ export class BrowserSettings {
 
   @observable
   private _contentMethod: IPFSContentMethod;
+
+  @observable
+  private _alwaysRunIPFS: boolean = true;
 }
 

@@ -2,6 +2,7 @@ import { observable, computed, action } from 'mobx';
 import { Tab, BrowserState } from "~/browserui/models/tab";
 import { ipcRenderer } from 'electron';
 import { BrowserSettings } from '~/browserui/models/browser-settings';
+import ipfsNode from '~/browserui/mixins/ipfs-node';
 
 export class BrowserSession{
 
@@ -43,6 +44,10 @@ export class BrowserSession{
       console.log("ipcRenderer got [Update available]");
       this.updateAvailable = true;
     });
+
+    if(this.settings.alwaysRunIPFS){
+      ipfsNode.startIPFSNode();
+    }
   }
 
   public settings: BrowserSettings = new BrowserSettings();

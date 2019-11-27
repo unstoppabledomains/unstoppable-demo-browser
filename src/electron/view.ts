@@ -38,15 +38,6 @@ export class View extends BrowserView {
       height: true,
     } as any);
 
-    this.window.on('resize', () => {
-      let newBounds = this.window.getBounds();
-      this.setBounds({ x: 0, y: 80, width: newBounds.width, height: newBounds.height - 110 });
-      this.setAutoResize({
-        width: true,
-        height: true,
-      } as any);
-    });
-
 
     this.webContents.loadURL(url);
     this.window.setBrowserView(null);
@@ -65,6 +56,8 @@ export class View extends BrowserView {
     });
 
     this.webContents.addListener('page-title-updated', (e, title) => {
+      title = title.replace('localhost', '');
+
       this.window.webContents.send(
         `view-title-updated-${this.webContents.id}`,
         title,

@@ -1,10 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { observer } from 'mobx-react-lite';
-import { SettingsHeader, Box1, Box2, Header1, LearnMoreButton, OptionLabel, OptionLabel2, Topic1, RadioButton } from './style';
+import { SettingsHeader, Box1, Box2, Header1, LearnMoreButton, OptionLabel, OptionLabel2, Topic1, RadioButton, CheckBox } from './style';
 import { BrowserSession } from "~/browserui/models/browser-session";
 import { BrowserSettings, IPFSContentMethod, DomainResolutionMethod } from "~/browserui/models/browser-settings";
 import { version } from "../../../../../../../package.json";
+import ipfsNode from "~/browserui/mixins/ipfs-node";
 
 let currentSession: BrowserSession = null;
 
@@ -20,6 +21,28 @@ const handleLearnMoreClick = () => {
   currentSession.selectedTab.url = "https://github.com/unstoppabledomains/unstoppable-demo-browser";
 }
 
+const handleIPFSAlwaysRun = (yesno: boolean) => {
+  if(yesno){
+    if(!ipfsNode.running){
+      ipfsNode.startIPFSNode();
+    }
+  }else{
+    if(ipfsNode.running){
+      ipfsNode.stopIPFSNode();
+    }
+  }
+
+  currentSession.settings.alwaysRunIPFS = yesno;
+}
+
+const handleIPFSStopClick = () => {
+  if(currentSession.settings.alwaysRunIPFS){
+    currentSession.settings.alwaysRunIPFS = false;
+  }
+
+  ipfsNode.stopIPFSNode();
+}
+
 const SettingsHeaderText = () => {
   if(currentSession.updateAvailable){
     return (
@@ -33,6 +56,22 @@ const SettingsHeaderText = () => {
         Settings [version {version}]
       </div>
     );
+  }
+}
+
+const IPFSNodeControls = (props:any) => {
+  if(props.running){
+    return(
+      <div>
+        IPFS Node running -- <button onClick={() => { handleIPFSStopClick(); }}>Stop</button>
+      </div>
+    )
+  }else{
+    return(
+      <div>
+        IPFS Node not running -- <button onClick={() => { ipfsNode.startIPFSNode() }}>Start</button>
+      </div>
+    )
   }
 }
 
@@ -112,6 +151,20 @@ export const SettingsPage = observer(({ visible, browserSession }: { visible: bo
               </div>
             </Topic1> */}
           </div>
+        </Box2>
+      </Box1>
+      <Box1>
+        IPFS Node
+        <Box2>
+          <div>
+            <OptionLabel2>
+              <CheckBox type="checkbox" onChange={() => { handleIPFSAlwaysRun(!settings.alwaysRunIPFS) }} checked={settings.alwaysRunIPFS} />
+              Always run IPFS node
+            </OptionLabel2>
+          </div>
+          <OptionLabel2>
+            <IPFSNodeControls running={ipfsNode.running} />
+          </OptionLabel2>
         </Box2>
       </Box1>
     </div >
