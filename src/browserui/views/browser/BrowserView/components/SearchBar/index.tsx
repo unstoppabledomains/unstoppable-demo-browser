@@ -26,7 +26,7 @@ const handleUrlSubmit = (event: any) => {
 }
 
 const handleBookmarksButtonClick = (event: any) => {
-  currentSession.selectedTab.browserState = BrowserState.Bookmarks;
+  currentSession.selectedTab.url = 'bookmarks';
 }
 
 const handleAddBookmark = (event: any) => {

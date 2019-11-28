@@ -45,11 +45,17 @@ export class Tab {
         return 'Not found';
       case BrowserState.Settings:
         return 'Settings';
+      case BrowserState.Bookmarks:
+        return 'Bookmarks';
       case BrowserState.DangerPage:
         return 'Unsafe site';
+      case BrowserState.NewTab:
+        return 'New Tab';
+      case BrowserState.AddBookmark:
+        return this._title;
     }
 
-    return 'New Tab';
+    return '';
   }
 
   @observable
@@ -142,7 +148,9 @@ export class Tab {
     this.urlBarValue = url;
 
     if(url == "settings"){
-      this.settingsPage();
+      this.browserState = BrowserState.Settings;
+    }else if(url == "bookmarks"){
+      this.browserState = BrowserState.Bookmarks;
     }else{
       new DomainResolver(this._session.settings).resolve(url).then((response: any) => {
         if(response.type == 'zil' && this._session.settings.ipfsContentMethod == IPFSContentMethod.DesignatedIPFSNode){
@@ -173,10 +181,6 @@ export class Tab {
     }else{
       ipcRenderer.send('set-browser-visibility', false);
     }
-  }
-
-  public settingsPage() {
-    this.browserState = BrowserState.Settings;
   }
 
   public buildBrowserView() {
