@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { icons, transparency } from '~/browserui/resources/constants';
 import { centerIcon } from '~/browserui/mixins';
 
@@ -77,15 +77,24 @@ export const BookMarkButtonBox1 = styled('div')`
 ;
 `;
 
+interface BookmarkProps {
+  color: string;
+  textColor: string;
+}
+
 export const BookMarkButton1 = styled('div')`
-    border-radius: 1px;
     width: 50px;
     height: 50px;
+    ${({ color, textColor }: BookmarkProps) => css`
+      background-color: ${color ? color : 'lightgray'};
+      color: ${textColor ? textColor : 'black'};
+    `};
+    line-height: 50px;
+    text-align: center;
     border-radius: 50px;
     overflow: hidden;
     margin: auto;
     margin-bottom: 10px;
-
 `;
 
 export const TextLabel1 = styled('div')`

@@ -11,4 +11,5 @@ export const Container = styled('div')`
   text-align: right;
   box-sizing: border-box;
   padding-right: 10px;
+  user-select: none;
 `;
