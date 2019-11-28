@@ -11,9 +11,9 @@ var bookmarksData = [
   { "id": 2, "name": "Etherscan", "identifier": "ES", color: "lightblue", "url": "https://etherscan.io/" },
   { "id": 3, "name": "Coinbase", "identifier": "CB", color: "gold", "url": "https://www.coinbase.com/" },
   { "id": 4, "name": "Mai Coin", "identifier": "MC", color: "grey", textColor: "white", "url": "https://www.maicoin.com/" },
-  { "id": 5, "name": "Blockchain", "identifier": "BC", color: "green", "url": "https://www.blockchain.com/" },
-  { "id": 6, "name": "Stocktwits - BTC", "identifier": "ST", color: "forestgreen", "url": "https://stocktwits.com/symbol/BTC.X" },
-  { "id": 7, "name": "GitHub", "identifier": "GH", color: "blue", "url": "http://www.github.com" },
+  { "id": 5, "name": "Blockchain", "identifier": "BC", color: "green", textColor: "white", "url": "https://www.blockchain.com/" },
+  { "id": 6, "name": "Stocktwits - BTC", "identifier": "ST", color: "forestgreen", textColor: "white", "url": "https://stocktwits.com/symbol/BTC.X" },
+  { "id": 7, "name": "GitHub", "identifier": "GH", color: "blue", textColor: "white", "url": "http://www.github.com" },
   { "id": 8, "name": "Unstoppable Domains", "identifier": "US", color: "orange", "url": "https://unstoppabledomains.com/" }
 ];
 

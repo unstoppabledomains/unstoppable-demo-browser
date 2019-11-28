@@ -7,6 +7,7 @@ import browserSession, { BrowserSession } from '~/browserui/models/browser-sessi
 import { ToolbarButton } from '../ToolbarButton';
 import { icons } from '~/browserui/resources/constants';
 import { ipcRenderer } from 'electron';
+import { Toolbar } from '~/browserui/views/browser/BrowserView/components/Toolbar';
 
 let currentSession: BrowserSession = null;
 
@@ -48,6 +49,45 @@ const SettingsButton = () => {
   )
 }
 
+const AddBookmarkButton = (props: any) => {
+  if (props.bookmarkable) {
+    return (
+      <ToolbarButton
+        size={20}
+        icon={icons.add}
+      />
+    )
+  }else{
+    return (
+      <span></span>
+    )
+  }
+}
+
+const BookmarksButton = () => {
+  return (
+    <ToolbarButton
+      size={20}
+      icon={icons.bookmarks}
+    />
+  )
+}
+
+const ReportButton = (props: any) => {
+  if (props.reportable) {
+    return (
+      <ToolbarButton
+        size={20}
+        icon={icons.alert}
+      />
+    )
+  } else {
+    return (
+      <span></span>
+    )
+  }
+}
+
 const handleUpdateClick = () => {
   ipcRenderer.send('update-reaquested');
 }
@@ -78,9 +118,12 @@ export const SearchBox = observer(({ browserSession }: { browserSession: Browser
               onChange={handleUrlBarChange}
             />
           </Form>
+          <AddBookmarkButton bookmarkable={browserSession.selectedTab.bookmarkable} />
         </InputContainer>
       </StyledSearchBox>
       <AutoUpdateButton />
+      <ReportButton reportable={browserSession.selectedTab.reportable} />
+      <BookmarksButton />
       <SettingsButton />
     </StyledSearchBar>
   );

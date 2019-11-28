@@ -1,5 +1,6 @@
 export const icons = {
   add: require('~/browserui/resources/icons/add.svg'),
+  alert: require('~/browserui/resources/icons/alert.svg'),
   back: require('~/browserui/resources/icons/back.svg'),
   forward: require('~/browserui/resources/icons/forward.svg'),
   close: require('~/browserui/resources/icons/close.svg'),

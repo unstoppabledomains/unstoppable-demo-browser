@@ -40,7 +40,6 @@ export const NavigationButtons = observer(({ browserSession }: { browserSession:
       <ToolbarButton
         size={24}
         icon={icons.back}
-        style={{ marginLeft: 8 }}
         onClick={handleBackClick}
         disabled={!browserSession.navigationState.canGoBack}
       />
@@ -53,7 +52,6 @@ export const NavigationButtons = observer(({ browserSession }: { browserSession:
       <ToolbarButton
         size={20}
         icon={loading ? icons.close : icons.refresh}
-        style={{ marginRight: 8 }}
         onClick={handleReloadClick}
       />
     </StyledContainer>

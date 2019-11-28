@@ -63,6 +63,27 @@ export class Tab {
   public emptyTabUrlValue = '';
 
   @computed
+  public get reportable(){
+    if(this._reportable && this.browserState == BrowserState.Browsing){
+      return true;
+    }
+
+    return false;
+  }
+
+  @computed
+  public get bookmarkable(){
+    if(this.browserState == BrowserState.Browsing){
+      return true;
+    }
+    
+    return false;
+  }
+
+  @observable
+  private _reportable: boolean = false;
+
+  @computed
   public get selected(){
     return this._session.selectedTab == this;
   }
@@ -172,6 +193,10 @@ export class Tab {
       ipcRenderer.on(`navigate-done-${this.viewId}`, (event, url:string) => {
         this._url = url;
         this.urlBarValue = url;
+
+        if(this._url.includes('.zil')){
+          this._reportable = true;
+        }
 
         this.browserState = BrowserState.Browsing;
       })

@@ -6,6 +6,7 @@ import { platform } from 'os';
 
 export const StyledSearchBar = styled('div')`
   position: relative;
+  box-sizing: border-box;
   z-index: 100;
   display: flex;
   flex-flow: row;
@@ -16,22 +17,25 @@ export const StyledSearchBar = styled('div')`
   background-color: #ffffff;
   border-bottom: 1px solid #dddddd;
   border-top: 1px solid #dddddd;
-  
+  padding-left: 8px;
+  padding-right: 8px;
 `;
 
 export const StyledSearchBox = styled('div')`
   margin-top: 5px;
   z-index: 2;
-  border-radius: 23px;
+  border-radius: 50px;
   margin-bottom: 5px;
   display: flex;
   overflow: hidden;
   flex-flow: column;
   flex: 1;
-  min-height: 28px;
+  min-height: 30px;
   transition: 0.2s height;
   position: relative;
   background-color: #eeeeee;
+  margin-left: 8px;
+  margin-right: 8px;
 `;
 
 export const SearchIcon = styled('div')`
@@ -63,6 +67,6 @@ export const Input = styled('input')`
 export const InputContainer = styled.div`
   display: flex;
   align-items: center;
-  min-height: 28px;
-  height: 28px;
+  min-height: 30px;
+  height: 30px;
 `;
