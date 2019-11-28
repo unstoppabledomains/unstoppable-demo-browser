@@ -122,6 +122,12 @@ export class Tab {
   private _browserState: BrowserState;
   
   public set browserState(browserState:BrowserState){
+
+    if(this._browserState == BrowserState.Browsing && browserState != BrowserState.Browsing){
+      // Unload underlying page
+      ipcRenderer.sendSync('unload-current-page');
+    }
+
     if(browserState == BrowserState.Browsing){
       ipcRenderer.send('set-browser-visibility', true);
     }else{

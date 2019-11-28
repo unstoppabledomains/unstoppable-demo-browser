@@ -26,6 +26,11 @@ export class ViewManager {
       event.returnValue = view.webContents.id;
     })
 
+    ipcMain.on('unload-current-page', (event) => {
+      console.log("Unloading current page");
+      this.currentView.webContents.loadURL('data:blank');
+      event.returnValue = true;
+    })
 
     ipcMain.on('set-browser-visibility', (event, visible) => {
       this.visible = visible;

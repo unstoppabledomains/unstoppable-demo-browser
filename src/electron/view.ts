@@ -49,10 +49,12 @@ export class View extends BrowserView {
         url = this.urlMappings.get(url);
       }
 
-      this.window.webContents.send(
-        `view-url-updated-${this.webContents.id}`,
-        url
-      );
+      if(url != 'data:blank'){
+        this.window.webContents.send(
+          `view-url-updated-${this.webContents.id}`,
+          url
+        );
+      }
     });
 
     this.webContents.addListener('page-title-updated', (e, title) => {
@@ -99,10 +101,12 @@ export class View extends BrowserView {
         url = this.urlMappings.get(url);
       }
 
-      this.window.webContents.send(
-        `navigate-done-${this.webContents.id}`,
-        url,
-      );
+      if(url != 'data:blank'){
+        this.window.webContents.send(
+          `navigate-done-${this.webContents.id}`,
+          url,
+        );
+      }
     });
 
 
