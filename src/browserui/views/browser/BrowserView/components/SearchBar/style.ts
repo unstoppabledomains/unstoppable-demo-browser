@@ -13,7 +13,7 @@ export const StyledSearchBar = styled('div')`
   align-items: center;
   color: rgba(0, 0, 0, 0.8);
   width: 100%;
-  height: 40px;
+  height: 46px;
   background-color: #ffffff;
   border-bottom: 1px solid #dddddd;
   border-top: 1px solid #dddddd;

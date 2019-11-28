@@ -12,4 +12,5 @@ export const Container = styled('div')`
   box-sizing: border-box;
   padding-right: 10px;
   user-select: none;
+  border-top: 1px solid #dddddd;
 `;

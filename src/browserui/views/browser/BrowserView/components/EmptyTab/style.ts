@@ -51,7 +51,7 @@ export const SearchIcon = styled('div')`
 
 export const BookMarkArea = styled('div')`
     box-sizing: border-box;
-    width: 550px;
+    width: 700px;
     height: 250px;
     margin: 0 auto;
     margin-top: 70px;
@@ -65,9 +65,10 @@ export const BookMarkArea = styled('div')`
 
 export const BookMarkButtonBox1 = styled('div')`
     box-sizing: border-box;
-    width: 100px;
-    height: 100px;
-    padding: 10px;
+    width: 150px;
+    min-height: 120px;
+    padding: 20px;
+    padding-bottom: 20px;
     border-radius: 10px;
     :hover{
         box-shadow: 0 0 5px rgba(33,33,33,.2); 
@@ -98,11 +99,9 @@ export const BookMarkButton1 = styled('div')`
 `;
 
 export const TextLabel1 = styled('div')`
-    font-size: 10px;
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
     user-select: none;
-
 `;
