@@ -8,6 +8,7 @@ import { ToolbarButton } from '../ToolbarButton';
 import { icons } from '~/browserui/resources/constants';
 import { ipcRenderer } from 'electron';
 import { Toolbar } from '~/browserui/views/browser/BrowserView/components/Toolbar';
+import { BrowserState } from '~/browserui/models/tab';
 
 let currentSession: BrowserSession = null;
 
@@ -22,6 +23,15 @@ const handleUrlSubmit = (event: any) => {
   var url = currentSession.selectedTab.urlBarValue;
 
   currentSession.selectedTab.url = url;
+}
+
+const handleBookmarksButtonClick = (event: any) => {
+  currentSession.selectedTab.browserState = BrowserState.Bookmarks;
+}
+
+const handleAddBookmark = (event: any) => {
+  var url = currentSession.selectedTab.urlBarValue;
+  currentSession.selectedTab.browserState = BrowserState.AddBookmark;
 }
 
 const AutoUpdateButton = () => {
@@ -55,6 +65,7 @@ const AddBookmarkButton = (props: any) => {
       <ToolbarButton
         size={20}
         icon={icons.add}
+        onClick={handleAddBookmark}
       />
     )
   }else{
@@ -69,6 +80,7 @@ const BookmarksButton = () => {
     <ToolbarButton
       size={20}
       icon={icons.bookmarks}
+      onClick={handleBookmarksButtonClick}
     />
   )
 }
@@ -99,13 +111,11 @@ const handleSettingsClick = () => {
 
 export const SearchBox = observer(({ browserSession }: { browserSession: BrowserSession }) => {
   currentSession = browserSession;
-  let height = 20;
+  let height = 30;
 
   return (
     <StyledSearchBar>
-
       <NavigationButtons browserSession={browserSession} />
-
       <StyledSearchBox style={{ height }} >
         <InputContainer>
           <SearchIcon />

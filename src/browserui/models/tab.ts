@@ -10,7 +10,9 @@ export enum BrowserState {
   Browsing = 'browsing',
   NotFound = 'not-found',
   Settings = 'settings',
-  DangerPage = 'danger'
+  DangerPage = 'danger',
+  AddBookmark = 'add-bookmark',
+  Bookmarks = 'bookmarks'
 }
 
 export class Tab {
@@ -196,6 +198,8 @@ export class Tab {
 
         if(this._url.includes('.zil')){
           this._reportable = true;
+        }else{
+          this._reportable = false;
         }
 
         this.browserState = BrowserState.Browsing;
