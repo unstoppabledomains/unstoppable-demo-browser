@@ -3,11 +3,10 @@ import * as React from 'react';
 
 import { StyledSearchBox, InputContainer, SearchIcon, Input, StyledSearchBar, Form } from './style';
 import { NavigationButtons } from '~/browserui/views/browser/BrowserView/components/NavigationButtons';
-import browserSession, { BrowserSession } from '~/browserui/models/browser-session';
+import { BrowserSession } from '~/browserui/models/browser-session';
 import { ToolbarButton } from '../ToolbarButton';
 import { icons } from '~/browserui/resources/constants';
 import { ipcRenderer } from 'electron';
-import { Toolbar } from '~/browserui/views/browser/BrowserView/components/Toolbar';
 import { BrowserState } from '~/browserui/models/tab';
 
 let currentSession: BrowserSession = null;
@@ -30,7 +29,8 @@ const handleBookmarksButtonClick = (event: any) => {
 }
 
 const handleAddBookmark = (event: any) => {
-  var url = currentSession.selectedTab.urlBarValue;
+  currentSession.bookmarks.pendingTitle = currentSession.selectedTab.title;
+  currentSession.bookmarks.pendingUrl = currentSession.selectedTab.urlBarValue;
   currentSession.selectedTab.browserState = BrowserState.AddBookmark;
 }
 

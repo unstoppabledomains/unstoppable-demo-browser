@@ -20,7 +20,7 @@ import { BookmarksPage } from "~/browserui/views/browser/BrowserView/components/
 
 const { dialog } = require('electron').remote;
 
-// browserSession.selectedTab.browserState = BrowserState.DangerPage;
+browserSession.selectedTab.browserState = BrowserState.Bookmarks;
 
 export const BrowserView = observer(({ browserSession }: { browserSession: BrowserSession }) => {
   return (
@@ -31,8 +31,8 @@ export const BrowserView = observer(({ browserSession }: { browserSession: Brows
       <EmptyTab browserSession={browserSession} visible={browserSession.selectedTab.browserState == BrowserState.NewTab} />
       <SettingsPage browserSession={browserSession} visible={browserSession.selectedTab.browserState == BrowserState.Settings} />
       <NotFoundPage visible={browserSession.selectedTab.browserState == BrowserState.NotFound } />
-      <BookmarksPage visible={browserSession.selectedTab.browserState == BrowserState.Bookmarks } />
-      <AddBookmarkPage visible={browserSession.selectedTab.browserState == BrowserState.AddBookmark } />
+      <BookmarksPage browserSession={browserSession} visible={browserSession.selectedTab.browserState == BrowserState.Bookmarks } />
+      <AddBookmarkPage browserSession={browserSession} visible={browserSession.selectedTab.browserState == BrowserState.AddBookmark } />
       <BottomBar />
     </BrowserContainer>
   );

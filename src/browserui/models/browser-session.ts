@@ -3,6 +3,7 @@ import { Tab, BrowserState } from "~/browserui/models/tab";
 import { ipcRenderer } from 'electron';
 import { BrowserSettings } from '~/browserui/models/browser-settings';
 import ipfsNode from '~/browserui/mixins/ipfs-node';
+import { Bookmarks } from '~/browserui/models/bookmarks';
 
 export class BrowserSession{
 
@@ -51,6 +52,7 @@ export class BrowserSession{
   }
 
   public settings: BrowserSettings = new BrowserSettings();
+  public bookmarks: Bookmarks = new Bookmarks();
 
   public tabs: Tab[] = observable.array([], { deep: false });
 

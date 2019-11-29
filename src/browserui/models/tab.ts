@@ -123,15 +123,21 @@ export class Tab {
   
   public set browserState(browserState:BrowserState){
 
-    if(this._browserState == BrowserState.Browsing && browserState != BrowserState.Browsing){
-      // Unload underlying page
-      ipcRenderer.sendSync('unload-current-page');
-    }
-
     if(browserState == BrowserState.Browsing){
       ipcRenderer.send('set-browser-visibility', true);
     }else{
       ipcRenderer.send('set-browser-visibility', false);
+    }
+
+    switch(browserState){
+      case BrowserState.Bookmarks:
+        this._url = 'bookmarks';
+        this.urlBarValue = this._url;
+        break;
+      case BrowserState.Settings:
+        this._url = 'settings';
+        this.urlBarValue = this._url;
+        break;
     }
 
     this._browserState = browserState;
