@@ -1,10 +1,10 @@
-import * as React from "react";
 import { observer } from 'mobx-react-lite';
-import { SettingsHeader, OptionRow, Box1, Box2, Header1, LearnMoreButton, OptionLabel, OptionLabel2, Topic1, RadioButton, CheckBox } from './style';
-import { BrowserSession } from "~/browserui/models/browser-session";
-import { BrowserSettings, IPFSContentMethod, DomainResolutionMethod } from "~/browserui/models/browser-settings";
-import { version } from "../../../../../../../package.json";
+import * as React from "react";
 import ipfsNode from "~/browserui/mixins/ipfs-node";
+import { BrowserSession } from "~/browserui/models/browser-session";
+import { BrowserSettings, DomainResolutionMethod, IPFSContentMethod } from "~/browserui/models/browser-settings";
+import { version } from "../../../../../../../package.json";
+import { Box1, Box2, CheckBox, Header1, LearnMoreButton, OptionLabel, OptionLabel2, OptionRow, RadioButton, SettingsHeader } from './style';
 
 let currentSession: BrowserSession = null;
 
@@ -105,7 +105,7 @@ export const SettingsPage = observer(({ visible, browserSession }: { visible: bo
             </OptionRow>
             <OptionRow>
               <RadioButton type="radio" name="domain" value="2" onChange={() => { handleDomainLookupMethodChange(DomainResolutionMethod.ZilliqaApi) }} checked={settings.domainResolutionMethod === DomainResolutionMethod.ZilliqaApi} />
-              <OptionLabel>Zilliqa API -</OptionLabel> <OptionLabel2> Direct blockchain lookup via API - non-paranoid + fast response times</OptionLabel2>
+              <OptionLabel>Blockchain API -</OptionLabel> <OptionLabel2> Direct blockchain lookup via API - non-paranoid + fast response times</OptionLabel2>
             </OptionRow>
             {/* <div>
               <RadioButton type="radio" name="domain" value="3" onChange={() => { handleDomainLookupMethodChange(DomainResolutionMethod.DirectBlockchainLookup) }} checked={settings.domainResolutionMethod === DomainResolutionMethod.DirectBlockchainLookup} />
