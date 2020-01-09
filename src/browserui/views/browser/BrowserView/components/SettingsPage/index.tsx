@@ -129,7 +129,7 @@ export const SettingsPage = observer(({ visible, browserSession }: { visible: bo
           <div>
             <OptionRow>
               <RadioButton type="radio" name="content" value="1" onChange={() => { handleIPFSMethodChange(IPFSContentMethod.CloudflareCDN) }} checked={settings.ipfsContentMethod == IPFSContentMethod.CloudflareCDN} />
-              <OptionLabel>Cloudlare CDN -</OptionLabel> <OptionLabel2> Non-paranoid + fast response times</OptionLabel2>
+              <OptionLabel>Cloudflare CDN -</OptionLabel> <OptionLabel2> Non-paranoid + fast response times</OptionLabel2>
             </OptionRow>
             <OptionRow>
               <RadioButton type="radio" name="content" value="2" onChange={() => { handleIPFSMethodChange(IPFSContentMethod.InfuraAPI) }} checked={settings.ipfsContentMethod == IPFSContentMethod.InfuraAPI} />
@@ -137,7 +137,7 @@ export const SettingsPage = observer(({ visible, browserSession }: { visible: bo
             </OptionRow>
             <OptionRow>
               <RadioButton type="radio" name="content" value="3" onChange={() => { handleIPFSMethodChange(IPFSContentMethod.DesignatedIPFSNode) }} checked={settings.ipfsContentMethod == IPFSContentMethod.DesignatedIPFSNode} />
-              <OptionLabel>Directly from IPFS network -</OptionLabel> <OptionLabel2> Parnoid + slow response times</OptionLabel2>
+              <OptionLabel>Directly from IPFS network -</OptionLabel> <OptionLabel2> Paranoid + slow response times</OptionLabel2>
             </OptionRow>
             {/* <Topic1>
               <div>
