@@ -1,7 +1,7 @@
 {
   "name": "unstoppablebrowser",
   "appId": "com.unstoppable.unstoppablebrowser",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A browser that reads zil DNS entries off the blockchain",
   "main": "build/bundle-electron.js",
   "scripts": {
@@ -68,5 +68,7 @@
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.9.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "whatwg-fetch": "^3.0.0"
+  }
 }
