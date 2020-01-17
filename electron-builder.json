@@ -11,18 +11,15 @@
     "output": "dist",
     "buildResources": "static/app-icons"
   },
-  "files": [
-    "build/**/*",
-    "package.json",
-    "static/**/*"
-  ],
+  "files": ["build/**/*", "package.json", "static/**/*"],
   "publish": {
     "provider": "github",
     "publishAutoUpdate": true
   },
   "mac": {
     "category": "public.app-category.navigation",
-    "hardenedRuntime" : true,
+    "type": "distribution",
+    "hardenedRuntime": true,
     "gatekeeperAssess": false,
     "entitlements": "build/entitlements.mac.plist",
     "entitlementsInherit": "build/entitlements.mac.plist"
@@ -31,17 +28,11 @@
     "target": [
       {
         "target": "nsis",
-        "arch": [
-          "x64",
-          "ia32"
-        ]
+        "arch": ["x64", "ia32"]
       },
       {
         "target": "zip",
-        "arch": [
-          "x64",
-          "ia32"
-        ]
+        "arch": ["x64", "ia32"]
       }
     ]
   },
