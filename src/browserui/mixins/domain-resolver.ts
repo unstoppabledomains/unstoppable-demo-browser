@@ -48,7 +48,7 @@ export class DomainResolver {
         this.browserSettings.domainResolutionMethod
       );
 
-      if (extension == "zil" || extension == "crypto") {
+      if (["zil", "crypto", "eth"].includes(extension)) {
         showUrl = url;
 
         switch (this.browserSettings.domainResolutionMethod) {

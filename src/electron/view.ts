@@ -1,4 +1,4 @@
-import { BrowserView, BrowserWindow, ipcMain } from "electron";
+import {BrowserView, BrowserWindow, ipcMain} from "electron";
 
 interface IUrlMap {
   url: string;
@@ -84,7 +84,7 @@ export class View extends BrowserView {
 
         let extension = new URL(url).hostname.split(".").pop();
 
-        if (extension === "zil" || extension === "crypto") {
+        if (["zil", "crypto", "eth"].includes(extension)) {
           console.log("zil domain");
         } else {
           this.webContents.loadURL(url);
@@ -97,7 +97,7 @@ export class View extends BrowserView {
 
       let extension = new URL(url).hostname.split(".").pop();
 
-      if (extension === "zil" || extension === "crypto") {
+      if (["zil", "crypto", "eth"].includes(extension)) {
         console.log("zil domain");
         event.preventDefault();
       }

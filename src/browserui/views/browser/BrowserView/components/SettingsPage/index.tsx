@@ -158,7 +158,7 @@ export const SettingsPage = observer(
                     DomainResolutionMethod.ZilliqaApi
                   }
                 />
-                <OptionLabel>Blockchain API -</OptionLabel>{" "}
+                <OptionLabel>Zilliqa / Infura API -</OptionLabel>{" "}
                 <OptionLabel2>
                   {" "}
                   Direct blockchain lookup via API - non-paranoid + fast

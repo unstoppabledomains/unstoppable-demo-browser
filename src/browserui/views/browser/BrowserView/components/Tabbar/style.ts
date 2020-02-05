@@ -1,11 +1,11 @@
-import styled from 'styled-components';
-import { ToolbarButton } from '../ToolbarButton';
-import { platform } from 'os';
+import styled from "styled-components";
+import {ToolbarButton} from "../ToolbarButton";
+import {platform} from "os";
 
 export const TOOLBAR_HEIGHT = 38;
 
-export const StyledTabbar = styled('div')`
-  height: 38px;
+export const StyledTabbar = styled("div")`
+  height: 48px;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -13,10 +13,10 @@ export const StyledTabbar = styled('div')`
   margin-left: 8px;
   align-items: center;
   display: flex;
-  margin-left: ${platform() === 'darwin' ? 90 : 0}px;
+  margin-left: ${platform() === "darwin" ? 90 : 0}px;
 `;
 
-export const TabsContainer = styled('div')`
+export const TabsContainer = styled("div")`
   height: 100%;
   position: relative;
   padding-top: 5px;
@@ -29,6 +29,8 @@ export const TabsContainer = styled('div')`
 export const AddTab = styled(ToolbarButton)`
   position: inline;
   margin-top: 1px;
+  margin-bottom: 2px;
+  padding-bottom: 2px;
   left: 0;
   top: 0;
 `;

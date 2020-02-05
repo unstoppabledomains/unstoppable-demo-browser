@@ -1,7 +1,7 @@
 {
   "appId": "com.unstoppable.unstoppablebrowser",
-  "productName": "Unstoppable Demo Browser",
-  "copyright": "Copyright © year ${author}",
+  "productName": "Unstoppable Browser",
+  "copyright": "Copyright © 2020 ${author}",
   "nsis": {
     "include": "static/installer.nsh",
     "oneClick": "false"
@@ -15,6 +15,9 @@
   "publish": {
     "provider": "github",
     "publishAutoUpdate": true
+  },
+  "dmg": {
+    "title": "${productName}"
   },
   "mac": {
     "category": "public.app-category.navigation",
