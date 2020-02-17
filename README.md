@@ -4,7 +4,7 @@
 
 
 <div align="center">
-  <h1>Unstoppable Demo Browser</h1>
+  <h1>Unstoppable Blockchain Browser</h1>
 
   <p>
   The Unstoppable Demo Browser is a web browser that can browse the decentralized web. Use it
