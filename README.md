@@ -8,22 +8,13 @@
 
   <p>
   The Unstoppable Blockchain Browser is a web browser that can browse the decentralized web. Use it
-  to visit blockchain TLD websites.
+  to visit blockchain TLD websites.  The Unstoppable Blockchain Browser is the first web browser to natively support an IPFS node, allowing users to easily seed their favorite websites with a click of a button.
   </p>
     <p>
-  The Unstoppable Blockchain Browser is the first web browser to natively support an IPFS node, allowing users to easily seed their favorite websites with a click of a button.
-  </p>
-    <p>
-  This is a community project, open sourced under MIT license.  The goal is to help users and developers play around with new emerging tools and visualize what's possible on the emerging decentralized internet.  
-  </p>
-      <p>
-  The browser is a bare bones implementation, does not support cookies or local storage, and should not be seen as a replacement for your regular browser when viewing website applications with significant backend interaction.  
+  This is a community project, open sourced under MIT license.  The goal is to help users and developers play around with new emerging tools and visualize what's possible on the emerging decentralized internet. The browser is a bare bones implementation, does not support cookies or local storage, and should not be seen as a replacement for your regular browser when viewing website applications with significant backend interaction.  
   </p>
         <p>
-Feel free to take as much of this code as your want, contribute to our porject, or fork it and make your own, the more diversity in the decentralized web ecosystem the better.
-  </p>
-          <p>
-If you have a particular feature or functionality you'd like added, please submit a github issue request.  Our team will work to support this browser going forward, and the issues with the most community support will also receive bounties to encourage other developers to participate and contribute.
+Please take as much of this code as your want, contribute to our porject, or fork it and make your own, the more diversity in the decentralized web ecosystem the better. If you have a particular feature or functionality you'd like added, please submit a github issue request.  Our team will work to support this browser going forward, and the issues with the most community support will also receive bounties to encourage other developers to participate and contribute.
   </p>
           <p>
 Happy Surfing!
