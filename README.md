@@ -14,7 +14,7 @@
   This is a community project, open sourced under MIT license.  The goal is to help users and developers play around with new emerging tools and visualize what's possible on the emerging decentralized internet. The browser is a bare bones implementation, does not support cookies or local storage, and should not be seen as a replacement for your regular browser when viewing website applications with significant backend interaction.  
   </p>
         <p>
-Please take as much of this code as your want, contribute to our porject, or fork it and make your own, the more diversity in the decentralized web ecosystem the better. If you have a particular feature or functionality you'd like added, please submit a github issue request.  Our team will work to support this browser going forward, and the issues with the most community support will also receive bounties to encourage other developers to participate and contribute.
+Please take as much of this code as your want, contribute to the project, or fork it and make your own, the more diversity in the decentralized web ecosystem the better. If you have a particular feature or functionality you'd like added, please submit a github issue request.  Our team will work to support this browser going forward, and the issues with the most community support will also receive bounties to encourage other developers to participate and contribute.
   </p>
           <p>
 Happy Surfing!
