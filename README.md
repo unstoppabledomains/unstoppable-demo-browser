@@ -17,7 +17,7 @@
 Please take as much of this code as your want, contribute to the project, or fork it and make your own, the more diversity in the decentralized web ecosystem the better. If you have a particular feature or functionality you'd like added, please submit a github issue request.  Our team will work to support this browser going forward, and the issues with the most community support will also receive bounties to encourage other developers to participate and contribute.
   </p>
           <p>
-Happy Surfing!
+Happy surfing on the truly free internet!
   </p>
 </div>
 
