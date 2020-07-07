@@ -42,7 +42,7 @@
     "copy-webpack-plugin": "^5.0.4",
     "create-dmg": "^4.2.0",
     "cross-env": "^6.0.3",
-    "electron": "^6.1.1",
+    "electron": "^7.2.4",
     "electron-builder": "^22.3.2",
     "electron-log": "^3.0.8",
     "electron-notarize": "^0.2.1",
